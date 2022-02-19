@@ -5,7 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Pre-requisites
 1. Install Node 14.19
 
-2. Install latest version of Angular cli
+2. Install latest version of Angular cli: 
    npm install -g @angular/cli
 
 ## Development server
