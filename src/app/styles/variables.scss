@@ -1,0 +1,37 @@
+@import 'color-vars';
+@import 'font-vars';
+@import 'grid-vars';
+
+$outline-width: 5px;
+
+$body-color: $gray-cool-b-90;
+
+$font-weight-base: $font-weight-light;
+$font-size-base: 0.875rem;
+
+$headings-font-weight: $font-weight-normal;
+$line-height-base: 1.42857143;
+$headings-line-height: 1.3333333;
+
+$h1-font-size: 30px;
+$h2-font-size: 24px;
+$h3-font-size: 20px;
+$h4-font-size: 16px;
+$h5-font-size: 16px;
+$h6-font-size: 14px;
+
+$link-color: $cyan-60;
+$border-width: 1px;
+$border-radius: 4px;
+
+$primary: #F1780E;
+$success: #41B23D;
+$info: #206BBB;
+$warning: #ED9716;
+$danger: #E64C4C;
+
+$input-focus-width: 0;
+$btn-focus-width: 0;
+
+// Container padding
+$container-padding-x: 1rem !default;

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "devilbotz-scouting-2022": {
+      "hosting": {
+        "devilscoutz2022": [
+          "devilbotz-scouting-2022"
+        ]
+      }
+    }
+  }
+}

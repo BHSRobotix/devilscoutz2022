@@ -1,0 +1,51 @@
+<!-- TODO - flesh out the form for scouting a single match -->
+
+<form class="match-form" [formGroup]="form">
+
+  <scl-form-field>
+    <scl-form-label label="Match ID"></scl-form-label>
+    <scl-form-control>
+      <input type="text" readonly="true" formControlName="matchId">
+    </scl-form-control>
+    <scl-form-error></scl-form-error>
+  </scl-form-field>
+
+  <scl-form-field>
+    <scl-form-label label="Team"></scl-form-label>
+    <scl-form-control>
+      <input type="text" readonly="true" formControlName="team">
+    </scl-form-control>
+    <scl-form-error></scl-form-error>
+  </scl-form-field>
+
+  <scl-form-field>
+    <scl-form-label label="Scout"></scl-form-label>
+    <scl-form-control>
+      <input type="text" readonly="true" formControlName="scoutId">
+    </scl-form-control>
+    <scl-form-error></scl-form-error>
+  </scl-form-field>
+
+  <scl-form-field>
+    <scl-form-label label="Low Goals Scored"></scl-form-label>
+    <scl-form-control>
+      <scl-numeric-spinner formControlName="lowGoalsScored"></scl-numeric-spinner>
+    </scl-form-control>
+    <scl-form-error></scl-form-error>
+  </scl-form-field>
+
+  <scl-form-field>
+    <scl-form-label label="High Goals Scored"></scl-form-label>
+    <scl-form-control>
+      <scl-numeric-spinner formControlName="highGoalsScored"></scl-numeric-spinner>
+    </scl-form-control>
+    <scl-form-error></scl-form-error>
+  </scl-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="submit()"
+    [disabled]="!form.valid">Submit</button>
+</form>

@@ -1,0 +1,171 @@
+@import 'variables';
+
+$form-field-background: $gray-warm-5;
+$form-field-accent: $gray-warm-60;
+$form-field-focus-accent: $cyan-70;
+$form-field-invalid-accent: $red-70;
+
+$form-field-min-height: 32px;
+$form-field-min-width: 130px;
+$form-field-accent-height: 1px;
+$form-field-focus-accent-height: 2px;
+$form-field-invalid-accent-height: 2px;
+
+// TODO - add dark mode
+
+@mixin scl-form-control() {
+  :host {
+    background: $form-field-background;
+    display: inline-block;
+    min-height: $form-field-min-height;
+    min-width: $form-field-min-width;
+    position: relative;
+  }
+
+  :host::after {
+    background: $form-field-accent;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: $form-field-accent-height;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  :host:focus,
+  :host.focus {
+    outline: none;
+    &::after {
+      height: $form-field-focus-accent-height;
+      background: $form-field-focus-accent;
+    }
+    scl-input-action-icon:not(.clear) {
+      color: $form-field-focus-accent;
+    }
+  }
+
+  :host.ng-touched.ng-invalid.ng-dirty:not(.readonly) {
+    &::after {
+      height: $form-field-invalid-accent-height;
+      background: $form-field-invalid-accent;
+    }
+  }
+
+  // MADE NEW VARS TO HERE
+
+  :host:hover,
+  :host.hover {
+    &::after {
+      height: 2px;
+      background: $cyan-60;
+    }
+    scl-input-action-icon:not(.clear) {
+      color: $cyan-60;
+    }
+  }
+
+  :host:disabled,
+  :host.disabled {
+    color: $gray-warm-40;
+    cursor: not-allowed;
+    &::after {
+      height: 2px;
+      background: $gray-warm-40;
+    }
+    scl-input-action-icon:not(.clear) {
+      color: $gray-warm-40;
+    }
+  }
+
+  :host.readonly {
+    cursor: default;
+    &::after {
+      background: transparent;
+    }
+
+    scl-input-action-icon {
+      display: none;
+    }
+  }
+
+  :host:disabled,
+  :host.disabled,
+  :host.readonly {
+    background: none;
+  }
+
+  :host:not(:disabled):not(.disabled):not(.readonly) {
+    &:focus,
+    &.focus,
+    &:hover,
+    &.hover {
+      scl-input-action-icon.clear.clearable {
+        display: block;
+      }
+      scl-input-action-icon.clearable {
+        display: none;
+      }
+    }
+  }
+
+  scl-input-action-icon {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+
+  scl-input-action-icon.clear {
+    display: none;
+  }
+
+  scl-menu-select {
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: absolute;
+  }
+}
+
+@mixin scl-native-input() {
+  @include scl-form-container();
+  background: none;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  display: block;
+  margin: 0;
+  min-height: 32px;
+  outline: none;
+  position: relative;
+
+  &::placeholder {
+    color: $gray-warm-70;
+    font-style: italic;
+  }
+
+  &:disabled {
+    color: $gray-warm-40;
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: $gray-warm-40;
+    }
+  }
+}
+
+@mixin scl-readonly-container() {
+  @include scl-form-container();
+  cursor: default;
+}
+
+@mixin scl-form-container() {
+  color: $gray-cool-b-90;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  padding: 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}

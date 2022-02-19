@@ -1,0 +1,27 @@
+<div class="scl-numeric-spinner">
+  <button
+    *ngIf="!readonly"
+    type="button"
+    [disabled]="disabled"
+    (click)="decrement()">-</button>
+  <input
+    #input
+    type="number"
+    (keydown.arrowUp)="increment()"
+    (keydown.arrowDown)="decrement()"
+    [hidden]="readonly"
+    [min]="min"
+    [max]="max"
+    [step]="step"
+    [placeholder]="placeholder"
+    (input)="onChange(this.value)"
+    [disabled]="disabled"/>
+  <button
+    *ngIf="!readonly"
+    type="button"
+    [disabled]="disabled"
+    (click)="increment()">+</button>
+  <span class="scl-numeric-spinner_readonly-container" *ngIf="readonly">
+    {{input.value}}
+  </span>
+</div>
