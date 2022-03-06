@@ -43,6 +43,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 3. Click **Finish** to complete the installation:
 
 4. Verify the nvm installation using nvm syntax: *nvm*
+![image](https://user-images.githubusercontent.com/11295766/156926001-4340c8c8-01ee-4c0c-aa97-096e0c92744c.png)
 
 
   
