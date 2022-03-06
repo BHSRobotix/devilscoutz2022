@@ -3,7 +3,10 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
 
 # Pre-requisites
-1. Install Node 14.19
+1. Install Node 14.19.
+   (Note: if you are running a version different from 14.19, you can install Node Version Manager to manage different version of node in your machine. 
+   Please see Node Version Manager section for details)
+
 
 2. Install latest version of Angular cli: 
    npm install -g @angular/cli
