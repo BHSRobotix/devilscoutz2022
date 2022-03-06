@@ -5,7 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Pre-requisites
 1. Install Node 14.19.
    (Note: if you are running a version different from 14.19, you can install Node Version Manager to manage different version of node in your machine. 
-   Please see Node Version Manager section for details)
+   Please see Node Version Manager section for details on how to install nvm on Windows)
 
 
 2. Install latest version of Angular cli: 
@@ -41,17 +41,17 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 1. Download the nvm installer (**nvm-setup.zip**) from: **https://github.com/coreybutler/nvm-windows/releases**
 
 2. Unzip and run the setup. 
-    (Note: If you already have node installed in your machine, it will prompt a message: **Node v.. is already installed. Do you want NVM to control this version?**.
+   (Note: If you already have node installed in your machine, it will prompt a message: **Node _version-number_ is already installed. Do you want NVM to control this version?**.
     Click **Yes** and proceed with the installation)
 
 3. Click **Finish** to complete the installation:
 
-4. Verify the nvm installation using nvm syntax: *nvm*
-![image](https://user-images.githubusercontent.com/11295766/156926001-4340c8c8-01ee-4c0c-aa97-096e0c92744c.png)
+4. Verify the nvm installation using nvm syntax: **nvm**
+   ![image](https://user-images.githubusercontent.com/11295766/156926001-4340c8c8-01ee-4c0c-aa97-096e0c92744c.png)
 
 5. You can install and manage different versions of node through **nvm**
 
-    - Install a different version of node: *nvm install <Node version>*
+    - Install a different version of node: **nvm install _version-number_**
     ![image](https://user-images.githubusercontent.com/11295766/156926391-2f9fd4d6-d86b-4012-a7a0-ecc821572dc4.png)
 
 
