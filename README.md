@@ -51,9 +51,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 5. You can install and manage different versions of node through **nvm**
 
-    - Install a different version of node: **nvm install _version-number_**
-    ![image](https://user-images.githubusercontent.com/11295766/156926391-2f9fd4d6-d86b-4012-a7a0-ecc821572dc4.png)
-
+    - Install a different version of node: **nvm install _version-number_**    
+    ![image](https://user-images.githubusercontent.com/11295766/156926960-16930a7d-d209-4714-99e2-24234362d08a.png)
 
     -	Use:
         **nvm list**:  to view all the versions of node installed in your machine (* points to the version used by your app or at the global level)
