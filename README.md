@@ -41,7 +41,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 1. Download the nvm installer (**nvm-setup.zip**) from: **https://github.com/coreybutler/nvm-windows/releases**
 
 2. Unzip and run the setup. 
-    (Note: If you already have node installed in your machine, it will prompt a message: *Node v.. is already installed. Do you want NVM to control this version?" Click **Yes** and proceed with the installation)
+    (Note: If you already have node installed in your machine, it will prompt a message: **Node v.. is already installed. Do you want NVM to control this version?**.
+    Click **Yes** and proceed with the installation)
 
 3. Click **Finish** to complete the installation:
 
