@@ -31,3 +31,18 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## nvm instructions
+
+1. Download the nvm installer (**nvm-setup.zip**) from: **https://github.com/coreybutler/nvm-windows/releases**
+
+2. Unzip and run the setup. 
+    (Note: If you already have node installed in your machine, it will prompt a message: *Node v.. is already installed. Do you want NVM to control this version?" Click **Yes** and proceed with the installation)
+
+3. Click **Finish** to complete the installation:
+
+4. Verify the nvm installation using nvm syntax: *nvm*
+
+
+  
