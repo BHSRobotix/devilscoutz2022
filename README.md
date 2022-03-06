@@ -57,8 +57,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     -	Use:
         **nvm list**:  to view all the versions of node installed in your machine (* points to the version used by your app or at the global level)
         
-        **nvm use node_version**: to switch the active version of node
-        ![image](https://user-images.githubusercontent.com/11295766/156926376-f5f89954-adaa-487d-afcb-7f18fb9fc129.png)
+        **nvm use node_version**: to switch the active version of node        
+        ![image](https://user-images.githubusercontent.com/11295766/156927002-639bdf8a-8bac-4848-b5ec-615b6cce59d8.png)
+
 
 
 
