@@ -36,7 +36,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 
-## Node Vesrion Manager (nvm) Instructions for Windows
+## Node Version Manager (nvm) Instructions for Windows
 
 1. Download the nvm installer (**nvm-setup.zip**) from: **https://github.com/coreybutler/nvm-windows/releases**
 
