@@ -45,17 +45,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 4. Verify the nvm installation using nvm syntax: *nvm*
 ![image](https://user-images.githubusercontent.com/11295766/156926001-4340c8c8-01ee-4c0c-aa97-096e0c92744c.png)
 
-5. You can install and manage different versions of node through *nvm*
+5. You can install and manage different versions of node through **nvm**
 
     - Install a different version of node: *nvm install <Node version>*
 
     -	Use:
         **nvm list**:  to view all the versions of node installed in your machine (* points to the version used by your app or at the global level)
         
-        **nvm use *node_version* **: to switch the active version of node
-
-
-    - 
+        **nvm use node_version**: to switch the active version of node 
 
 
 
