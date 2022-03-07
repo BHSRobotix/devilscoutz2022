@@ -25,6 +25,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { DriverFeedbackComponent } from './driver-feedback/driver-feedback.component';
 import { AdminComponent } from './admin/admin.component';
 import { TeamListComponent } from './reports/team-list/team-list.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TeamListComponent } from './reports/team-list/team-list.component';
     ReportsComponent,
     DriverFeedbackComponent,
     AdminComponent,
-    TeamListComponent
+    TeamListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

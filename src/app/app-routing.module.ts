@@ -7,21 +7,23 @@ import { TeamListComponent } from './reports/team-list/team-list.component';
 import { ReportsComponent } from './reports/reports.component';
 import { AdminComponent } from './admin/admin.component';
 import { DriverFeedbackComponent } from './driver-feedback/driver-feedback.component';
+import { AuthGuard } from './services/auth/auth.guard';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {
-    path: 'menu',
-    component: MainMenuComponent,
+  { path: 'menu', component: MainMenuComponent,
+    canActivate: [ AuthGuard ],
     resolve: {
       // scoutId: ResolveAccountId
     },
   },
-  { path: 'matchScoutingMenu', component: MatchScoutingMenuComponent },
-  { path: 'scoutMatch', component: ScoutMatchComponent },
-  { path: 'driverFeedback', component: DriverFeedbackComponent },
-  { path: 'reports/teamList', component: TeamListComponent },
-  { path: 'reports', component: ReportsComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'matchScoutingMenu', component: MatchScoutingMenuComponent, canActivate: [ AuthGuard ] },
+  { path: 'scoutMatch', component: ScoutMatchComponent, canActivate: [ AuthGuard ] },
+  { path: 'driverFeedback', component: DriverFeedbackComponent, canActivate: [ AuthGuard ] },
+  { path: 'reports/teamList', component: TeamListComponent, canActivate: [ AuthGuard ] },
+  { path: 'reports', component: ReportsComponent, canActivate: [ AuthGuard ] },
+  { path: 'admin', component: AdminComponent, canActivate: [ AuthGuard ] },
+  { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'menu' }
 ];
 
