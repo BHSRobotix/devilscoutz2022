@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { faRobot } from '@fortawesome/free-solid-svg-icons';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -12,6 +12,6 @@ export class AppComponent {
   title = 'devilscoutz2022';
   faRobot = faRobot;
 
-  constructor(private dialog: MatDialog, private store: AngularFirestore) { }
+  constructor(private dialog: MatDialog, private store: Firestore) { }
 
 }

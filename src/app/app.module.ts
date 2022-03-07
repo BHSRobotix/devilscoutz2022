@@ -11,8 +11,8 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatButtonModule } from '@angular/material/button';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { FirestoreModule } from '@angular/fire/firestore';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
@@ -49,7 +49,7 @@ import { LoginComponent } from './login/login.component';
     FontAwesomeModule,
     MatButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    FirestoreModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
