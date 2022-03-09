@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dbtz-login',
@@ -8,12 +9,29 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  doGoogleLogin() {
-    this.authService.doGoogleAuth();
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
+
+  doGoogleLogin(): void {
+    this.authService.doGoogleLogin().then(result => {
+      console.log('back from authservice, result=', result);
+      this.router.navigateByUrl('/menu');
+    });
+  }
+
+  doUnauthenticatedLogin(): void {
+    this.authService.doUnauthenticatedLogin();
+    this.router.navigateByUrl('/menu');
+  }
+
+  logout(): void {
+    this.authService.doLogout();
   }
 }

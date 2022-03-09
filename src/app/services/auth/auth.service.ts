@@ -1,117 +1,101 @@
 import { Injectable, NgZone } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider } from 'firebase/auth';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
-// const provider = new GoogleAuthProvider();
+import firebase from 'firebase/app';
+import AuthProvider = firebase.auth.AuthProvider;
+import UserCredential = firebase.auth.UserCredential;
+import { getUnauthenticatedUser } from '../../shared/anonymizer.utils';
+import { BehaviorSubject } from 'rxjs';
+
+const userLocalStorageKey = '_dbtzScoutingUser';
+
+export interface User {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  emailVerified: boolean;
+  authenticated: boolean;
+  guest: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  // userData: Observable<firebase.User>;
+  private user: User | null;
+  private user$: BehaviorSubject<User | null>;
 
-  constructor(
-    private angularFireAuth: AngularFireAuth,
-    private router: Router,
-    private ngZone: NgZone
-  ) {
-    // this.userData = angularFireAuth.authState;
+  constructor(private fireAuth: AngularFireAuth, private router: Router) {
+    this.user = this.getUserFromLocalStorage();
+    this.user$ = new BehaviorSubject<User | null>(this.user);
   }
 
-  // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    console.log('isloggedin?');
-    return false;
-    // const user = JSON.parse(localStorage.getItem('user')!);
-    // return user !== null && user.emailVerified !== false ? true : false;
+    return this.user?.authenticated || this.user?.guest || false;
   }
 
-  // Sign in with Google
-  doGoogleAuth(): Promise<void> {
-    return this.authorizeUser(new GoogleAuthProvider())
-      .then((res: any) => {
-        if (res) {
-          // this.router.navigate(['somewhere']);
-          console.log(res);
-        }
-      });
+  get loggedInUser(): BehaviorSubject<User | null> {
+    return this.user$;
   }
 
-  authorizeUser(provider: any): Promise<void> {
-    return this.angularFireAuth.signInWithPopup(provider)
-      .then((result) => {
-
-        // this.ngZone.run(() => {
-        //   this.router.navigate(['somewhere']);
-        // });
-        console.log(result.user);
-        // this.SetUserData(result.user);
+  doGoogleLogin(): Promise<any> {
+    const provider: AuthProvider = new firebase.auth.GoogleAuthProvider();
+    return this.fireAuth.signInWithPopup(provider)
+      .then((cred: UserCredential) => {
+        const user = {
+          uid: cred.user?.uid || '',
+          email: cred.user?.email || '',
+          displayName: cred.user?.displayName || '',
+          photoURL: cred.user?.photoURL || '',
+          emailVerified: cred.user?.emailVerified || false,
+          authenticated: true,
+          guest: false
+        };
+        this.user = user;
+        this.user$.next(user);
+        this.putUserIntoLocalStorage(user);
+        // this.router.navigateByUrl('/menu');
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error(error);
       });
   }
 
+  doUnauthenticatedLogin(): void {
+    this.user = getUnauthenticatedUser();
+    this.user$.next(this.user);
+    this.putUserIntoLocalStorage(this.user);
+  }
 
-  // // Sign in with Google
-  // GoogleAuth() {
-  //   return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-  //     if (res) {
-  //       this.router.navigate(['dashboard']);
-  //     }
-  //   });
-  // }
-  // // Auth logic to run auth providers
-  // AuthLogin(provider: any) {
-  //   return this.afAuth
-  //     .signInWithPopup(provider)
-  //     .then((result) => {
-  //       this.ngZone.run(() => {
-  //         this.router.navigate(['dashboard']);
-  //       });
-  //       this.SetUserData(result.user);
-  //     })
-  //     .catch((error) => {
-  //       window.alert(error);
-  //     });
-  // }
+  doLogout(): void {
+    this.user = null;
+    this.user$.next(this.user);
+    this.removeUserFromLocalStorage();
+  }
 
-  // /* Sign up */
-  // SignUp(email: string, password: string) {
-  //   this.angularFireAuth
-  //     .auth
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then(res => {
-  //       console.log('You are Successfully signed up!', res);
-  //     })
-  //     .catch(error => {
-  //       console.log('Something is wrong:', error.message);
-  //     });
-  // }
-  //
-  // /* Sign in */
-  // SignIn(email: string, password: string) {
-  //   this.angularFireAuth
-  //     .auth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then(res => {
-  //       console.log('You're in!');
-  //     })
-  //     .catch(err => {
-  //       console.log('Something went wrong:',err.message);
-  //     });
-  // }
-  //
-  // /* Sign out */
-  // SignOut() {
-  //   this.angularFireAuth
-  //     .auth
-  //     .signOut();
-  // }
+  private getUserFromLocalStorage(): User | null {
+    if (!!localStorage) {
+      const storedUser = localStorage.getItem(userLocalStorageKey);
+      if (!!storedUser) {
+        return JSON.parse(storedUser) as User;
+      }
+    }
+    return null;
+  }
+
+  private putUserIntoLocalStorage(user: User): void {
+    if (!!localStorage) {
+      localStorage.setItem(userLocalStorageKey, JSON.stringify(user));
+    }
+  }
+
+  private removeUserFromLocalStorage(): void {
+    if (!!localStorage) {
+      localStorage.removeItem(userLocalStorageKey);
+    }
+  }
 
 }
-
-
