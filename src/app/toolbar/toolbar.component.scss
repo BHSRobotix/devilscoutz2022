@@ -1,0 +1,45 @@
+@import '../styles/variables';
+
+:host {
+  .app-toolbar {
+    display: flex;
+    flex-direction: row;
+    background-color: $gray-cool-a-95;
+    color: white;
+
+    fa-icon {
+      color: $red-40;
+    }
+    a {
+      flex: 1 0 auto;
+      color: white;
+      display: flex;
+      flex-direction: row;
+      vertical-align: center;
+      text-decoration: none;
+      fa-icon {
+        margin: 0 4px;
+      }
+      div {
+        margin: 1px 4px;
+      }
+    }
+
+    .profile {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: row;
+      vertical-align: center;
+      span {
+        font-size: 12px;
+      }
+      img {
+        border: 2px solid $white;
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        margin-left: 12px;
+      }
+    }
+  }
+}

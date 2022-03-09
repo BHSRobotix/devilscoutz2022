@@ -13,6 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +28,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { DriverFeedbackComponent } from './driver-feedback/driver-feedback.component';
 import { AdminComponent } from './admin/admin.component';
 import { TeamListComponent } from './reports/team-list/team-list.component';
+import { LoginComponent } from './login/login.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +40,9 @@ import { TeamListComponent } from './reports/team-list/team-list.component';
     ReportsComponent,
     DriverFeedbackComponent,
     AdminComponent,
-    TeamListComponent
+    TeamListComponent,
+    LoginComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,10 @@ import { TeamListComponent } from './reports/team-list/team-list.component';
     FontAwesomeModule,
     MatButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,

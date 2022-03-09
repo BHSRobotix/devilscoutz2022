@@ -1,0 +1,49 @@
+@import '../../app/styles/variables';
+
+:host {
+  display: block;
+  margin: auto;
+
+  .google-btn {
+    border: 1px solid $gray-warm-40;
+    background: $white;
+    color: $blue-60;
+  }
+
+  .google-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-image: url('../../assets/icons/google.svg');
+    background-size: 24px 24px;
+  }
+
+  button {
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    padding: 6px;
+    margin: 16px auto;
+    span {
+      display: inline-block;
+      margin-left: 12px;
+    }
+  }
+
+  div.action {
+    width: 200px;
+    margin: auto;
+    cursor: pointer;
+    text-decoration: underline;
+    color: $blue-80;
+  }
+  div.instructions {
+    width: 120px;
+    margin: auto;
+    color: $gray-warm-50;
+    font-size: 10px;
+  }
+}

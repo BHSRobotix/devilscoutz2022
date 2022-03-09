@@ -1,0 +1,10 @@
+<mat-toolbar class="app-toolbar">
+  <a [routerLink]="'mainMenu'">
+    <fa-icon [icon]="faRobot"></fa-icon>
+    <div>2876 Devilbotz Scouting</div>
+  </a>
+  <div *ngIf="!!user" class="profile">
+    <span>Welcome {{ user?.displayName }}</span>
+    <img [src]="user?.photoURL">
+  </div>
+</mat-toolbar>

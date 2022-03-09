@@ -1,0 +1,14 @@
+<button type="button" class="google-btn" (click)="doGoogleLogin()">
+  <i class="google-icon"></i>
+  <span>Sign in with Google</span>
+</button>
+
+<div>
+  <div class="action" (click)="doUnauthenticatedLogin()">
+    Continue without authentication
+  </div>
+  <div class="instructions">(experience is limited)</div>
+</div>
+
+<button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+
