@@ -27,23 +27,26 @@
     width: 200px;
     padding: 6px;
     margin: 16px auto;
+
     span {
       display: inline-block;
       margin-left: 12px;
     }
   }
 
-  div.action {
-    width: 200px;
+  div {
     margin: auto;
-    cursor: pointer;
-    text-decoration: underline;
-    color: $blue-80;
-  }
-  div.instructions {
-    width: 120px;
-    margin: auto;
-    color: $gray-warm-50;
-    font-size: 10px;
+    align-items: center;
+    &.action {
+      width: 120px;
+      cursor: pointer;
+      text-decoration: underline;
+      color: $blue-80;
+    }
+    &.instructions {
+      width: 150px;
+      color: $gray-warm-50;
+      font-size: 10px;
+    }
   }
 }

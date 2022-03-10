@@ -1,4 +1,4 @@
-import { User } from '../services/auth/auth.service';
+import { ScoutingUser } from '../services/auth/auth.service';
 
 const ADJECTIVES = [
   'Awkward', 'Bouncy', 'Comical', 'Diluted', 'Emphatic', 'Funky', 'Gracious', 'Happy',
@@ -17,7 +17,7 @@ export function getRandomDisplayName(): string {
   return `${ randomAdjective() } ${ randomAnimal() }`;
 }
 
-export function getUnauthenticatedUser(): User {
+export function getUnauthenticatedUser(): ScoutingUser {
   return {
     uid: `unauth${ Date.now() }`,
     email: '',
@@ -25,6 +25,7 @@ export function getUnauthenticatedUser(): User {
     photoURL: ANONYMOUS_PHOTO_URL,
     emailVerified: false,
     authenticated: false,
-    guest: true
+    guest: true,
+    role: 'guest'
   };
 }
