@@ -30,6 +30,9 @@ import { AdminComponent } from './admin/admin.component';
 import { TeamListComponent } from './reports/team-list/team-list.component';
 import { LoginComponent } from './login/login.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ScoutCompLibModule
+    ScoutCompLibModule,
+    MatSelectModule,
+    MatOptionModule,
+    FormsModule
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }

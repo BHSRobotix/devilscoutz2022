@@ -30,8 +30,10 @@
       display: flex;
       flex-direction: row;
       vertical-align: center;
-      span {
-        font-size: 12px;
+      .text {
+        font-size: 14px;
+        line-height: 14px;
+        text-align: right;
       }
       img {
         border: 2px solid $white;

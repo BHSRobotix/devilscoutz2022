@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faRobot } from '@fortawesome/free-solid-svg-icons';
-import { AuthService, User } from '../services/auth/auth.service';
+import { AuthService, ScoutingUser, User } from '../services/auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -12,8 +12,8 @@ export class ToolbarComponent implements OnInit {
 
   title = 'devilscoutz2022';
   faRobot = faRobot;
-  user: User | null | undefined;
-  user$: BehaviorSubject<User | null> | undefined;
+  user: ScoutingUser | undefined;
+  user$: BehaviorSubject<ScoutingUser> | undefined;
 
   constructor(private readonly auth: AuthService) { }
 

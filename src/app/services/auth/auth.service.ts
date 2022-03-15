@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -7,6 +7,7 @@ import AuthProvider = firebase.auth.AuthProvider;
 import UserCredential = firebase.auth.UserCredential;
 import { getUnauthenticatedUser } from '../../shared/anonymizer.utils';
 import { BehaviorSubject } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 const userLocalStorageKey = '_dbtzScoutingUser';
 
@@ -20,24 +21,36 @@ export interface User {
   guest: boolean;
 }
 
+export interface ScoutingUser extends User {
+  nickname?: string;
+  role?: 'guest' | 'scout' | 'lead-scout' | 'admin';
+}
+
+const EMPTY_USER: ScoutingUser = {
+  uid: '', email: '', displayName: '', photoURL: '', emailVerified: false,
+  authenticated: false, guest: true, role: 'guest'
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private user: User | null;
-  private user$: BehaviorSubject<User | null>;
+  private user: ScoutingUser;
+  private user$: BehaviorSubject<ScoutingUser>;
 
-  constructor(private fireAuth: AngularFireAuth, private router: Router) {
+  constructor(private fireAuth: AngularFireAuth,
+              private firestore: AngularFirestore,
+              private router: Router) {
     this.user = this.getUserFromLocalStorage();
-    this.user$ = new BehaviorSubject<User | null>(this.user);
+    this.user$ = new BehaviorSubject<ScoutingUser>(this.user);
   }
 
   get isLoggedIn(): boolean {
     return this.user?.authenticated || this.user?.guest || false;
   }
 
-  get loggedInUser(): BehaviorSubject<User | null> {
+  get loggedInUser(): BehaviorSubject<ScoutingUser> {
     return this.user$;
   }
 
@@ -45,18 +58,34 @@ export class AuthService {
     const provider: AuthProvider = new firebase.auth.GoogleAuthProvider();
     return this.fireAuth.signInWithPopup(provider)
       .then((cred: UserCredential) => {
-        const user = {
+        const user: ScoutingUser = {
           uid: cred.user?.uid || '',
           email: cred.user?.email || '',
           displayName: cred.user?.displayName || '',
           photoURL: cred.user?.photoURL || '',
           emailVerified: cred.user?.emailVerified || false,
           authenticated: true,
-          guest: false
+          guest: false,
+          role: 'scout'  // start as a minimum of scout, let observable below update
         };
         this.user = user;
         this.user$.next(user);
         this.putUserIntoLocalStorage(user);
+
+        // Go to Firebase scouting-users table to figure out what roles people have
+        if (!!this.user.uid) {
+          console.log('going looking for user', this.user.uid);
+          this.firestore.collection('scoutingUsers',
+            ref => ref.where('uid', '==', this.user?.uid))
+            .get()
+            .subscribe((querySnapshot) => {
+              querySnapshot.forEach((doc: any) => {
+                this.user.role = doc.data().role;
+                this.user$.next(this.user);
+                this.putUserIntoLocalStorage(this.user);
+              });
+            });
+        }
         // this.router.navigateByUrl('/menu');
       })
       .catch((error: Error) => {
@@ -71,22 +100,22 @@ export class AuthService {
   }
 
   doLogout(): void {
-    this.user = null;
+    this.user = EMPTY_USER;
     this.user$.next(this.user);
     this.removeUserFromLocalStorage();
   }
 
-  private getUserFromLocalStorage(): User | null {
+  private getUserFromLocalStorage(): ScoutingUser {
     if (!!localStorage) {
       const storedUser = localStorage.getItem(userLocalStorageKey);
       if (!!storedUser) {
-        return JSON.parse(storedUser) as User;
+        return JSON.parse(storedUser) as ScoutingUser;
       }
     }
-    return null;
+    return EMPTY_USER;
   }
 
-  private putUserIntoLocalStorage(user: User): void {
+  private putUserIntoLocalStorage(user: ScoutingUser): void {
     if (!!localStorage) {
       localStorage.setItem(userLocalStorageKey, JSON.stringify(user));
     }

@@ -1,0 +1,54 @@
+@import '../../app/styles/variables';
+:host {
+  display: block;
+  margin: auto;
+
+  .admin-action {
+    display: block;
+    margin: 16px auto;
+    width: 250px;
+    border: 1px solid $gray-warm-30;
+    border-radius: 4px;
+    padding: 8px;
+
+    button {
+      cursor: pointer;
+      font-size: 12px;
+      border: 1px solid $gray-warm-40;
+      border-radius: 4px;
+      width: 200px;
+      padding: 6px;
+      display: block;
+      margin: 0 auto;
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    select {
+      font-size: 14px;
+      padding: 6px;
+      display: block;
+      margin: 4px auto;
+    }
+
+    .description {
+      font-size: 10px;
+      line-height: 12px;
+      color: $gray-warm-40;
+      display: block;
+      margin: 4px auto;
+      width: 200px;
+    }
+
+    &.rare button {
+      background-color: $red-20;
+      border: 1px solid $red-50;
+    }
+
+    &.frequent button {
+      background-color: $green-30;
+      border: 1px solid $green-50;
+    }
+  }
+}

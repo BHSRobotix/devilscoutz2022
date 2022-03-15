@@ -4,7 +4,11 @@
     <div>2876 Devilbotz Scouting</div>
   </a>
   <div *ngIf="!!user" class="profile">
-    <span>Welcome {{ user?.displayName }}</span>
+    <div class="text">
+      Welcome {{ user?.displayName }}
+      <br/>
+      {{ user?.role }}
+    </div>
     <img [src]="user?.photoURL">
   </div>
 </mat-toolbar>

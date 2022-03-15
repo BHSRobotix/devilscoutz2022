@@ -1,8 +1,42 @@
-<h3>TODO - implement this ADMIN screen</h3>
-Should be a set of buttons / tools to do administrative things, like:
+<h3> STILL TODO </h3>
 <ul>
-  <li>authorize new users</li>
-  <li>pull match schedule from TBA</li>
-  <li>update current match</li>
-  <li>probably other stuff</li>
+  <li>authorize new user</li>
+  <li>user request new role (scout, lead scout, admin, etc.)</li>
+  <li>update current match?</li>
+  <li>add role requirements to each item</li>
 </ul>
+
+<div class="admin-actions">
+
+  <div *ngIf="isAdmin" class="admin-action rare">
+    <button (click)="updateDistrictEvents()">Update NE District Events</button>
+    <div class="description">
+      Reads the New England District events from TBA and stores the data in Firebase.
+    </div>
+  </div>
+
+  <div *ngIf="isLeadScout || isAdmin"  class="admin-action frequent">
+    <select [(ngModel)]="currentEvent" name="currentEvent">
+      <option value="" selected></option>
+      <option *ngFor="let event of localEvents" [value]="event.key">
+        {{ eventDisplayName(event) }}
+      </option>
+    </select>
+    <button (click)="updateMatchesAtCurrentEvent()" [disabled]="!currentEvent">
+      Update Matches from Event
+    </button>
+    <div class="description">
+      Choose an event, and update the match results from TBA, saved in Firebase.
+    </div>
+  </div>
+
+  <div *ngIf="isAdmin"  class="admin-action frequent">
+    <button (click)="testService('2022nhgrs')">TEST BUTTON</button>
+    <div class="description">
+      The latest test method!
+    </div>
+  </div>
+
+
+</div>
+
