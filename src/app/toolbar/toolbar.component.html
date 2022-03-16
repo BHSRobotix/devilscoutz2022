@@ -1,13 +1,12 @@
 <mat-toolbar class="app-toolbar">
   <a [routerLink]="'mainMenu'">
     <fa-icon [icon]="faRobot"></fa-icon>
-    <div>2876 Devilbotz Scouting</div>
+    <div>2876 DevilScoutz</div>
   </a>
-  <div *ngIf="!!user" class="profile">
+  <div *ngIf="!!user?.uid" class="profile">
     <div class="text">
-      Welcome {{ user?.displayName }}
-      <br/>
-      {{ user?.role }}
+      <div class="name">{{ displayName }}</div>
+      <div class="role">{{ user?.role }}</div>
     </div>
     <img [src]="user?.photoURL">
   </div>

@@ -93,18 +93,8 @@ export class AdminComponent implements OnInit {
   }
 
   updateDistrictEvents(): void {
-    console.log('updateDistrictEvents');
-    this.tba.getDistrictEvents().subscribe(result => {
-        console.log(result);
-        result.forEach((evt: TbaSimpleEvent) => {
-          this.firestore.collection('events').doc(evt.key).set(evt)
-            .then(() => {
-              console.log('Document successfully written!');
-            })
-            .catch((error) => {
-              console.error('Error writing document: ', error);
-            });
-        });
+    this.tba.getDistrictEvents().subscribe(events => {
+        this.eventsService.postEvents(events);
       },
       error => {
         console.log(error);

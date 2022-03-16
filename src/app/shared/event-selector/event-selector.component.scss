@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+
+:host {
+  display: inline-block;
+  padding: 8px;
+
+  .inline-edit, select-edit {
+    cursor: pointer;
+    border-bottom: 1px dashed $gray-warm-60;
+    color: $gray-warm-60;
+  }
+}

@@ -29,4 +29,8 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
+  get displayName(): string {
+    return this.user?.nickname || this.user?.displayName || 'Guest';
+  }
+
 }

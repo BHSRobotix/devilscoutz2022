@@ -5,41 +5,55 @@
   <scl-form-field>
     <scl-form-label label="Match ID"></scl-form-label>
     <scl-form-control>
-      <input type="text" readonly="true" formControlName="matchId">
+      <input type="hidden" formControlName="matchId">
+      <span>{{ form.get('matchId')?.value }}</span>
     </scl-form-control>
-    <scl-form-error></scl-form-error>
   </scl-form-field>
 
   <scl-form-field>
     <scl-form-label label="Team"></scl-form-label>
     <scl-form-control>
-      <input type="text" readonly="true" formControlName="team">
+      <input type="hidden" formControlName="team">
+      <span>{{ form.get('team')?.value }}</span>
     </scl-form-control>
-    <scl-form-error></scl-form-error>
   </scl-form-field>
 
   <scl-form-field>
     <scl-form-label label="Scout"></scl-form-label>
     <scl-form-control>
-      <input type="text" readonly="true" formControlName="scoutId">
+      <input type="hidden" formControlName="scoutId">
+      <span>{{ this.scout?.nickname }}</span>
     </scl-form-control>
-    <scl-form-error></scl-form-error>
   </scl-form-field>
 
+  <h3>Autonomous</h3>
   <scl-form-field>
     <scl-form-label label="Low Goals Scored"></scl-form-label>
     <scl-form-control>
-      <scl-numeric-spinner formControlName="lowGoalsScored"></scl-numeric-spinner>
+      <scl-numeric-spinner formControlName="autoLowGoalsScored"></scl-numeric-spinner>
     </scl-form-control>
-    <scl-form-error></scl-form-error>
   </scl-form-field>
 
   <scl-form-field>
     <scl-form-label label="High Goals Scored"></scl-form-label>
     <scl-form-control>
-      <scl-numeric-spinner formControlName="highGoalsScored"></scl-numeric-spinner>
+      <scl-numeric-spinner formControlName="autoHighGoalsScored"></scl-numeric-spinner>
     </scl-form-control>
-    <scl-form-error></scl-form-error>
+  </scl-form-field>
+
+  <h3>Tele-op</h3>
+  <scl-form-field>
+    <scl-form-label label="Low Goals Scored"></scl-form-label>
+    <scl-form-control>
+      <scl-numeric-spinner formControlName="teleLowGoalsScored"></scl-numeric-spinner>
+    </scl-form-control>
+  </scl-form-field>
+
+  <scl-form-field>
+    <scl-form-label label="High Goals Scored"></scl-form-label>
+    <scl-form-control>
+      <scl-numeric-spinner formControlName="teleHighGoalsScored"></scl-numeric-spinner>
+    </scl-form-control>
   </scl-form-field>
 
   <button

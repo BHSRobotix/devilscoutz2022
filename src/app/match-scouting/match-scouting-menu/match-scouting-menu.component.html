@@ -1,4 +1,8 @@
-<!-- TODO - build out a match scouting menu that makes things easy -->
-
-Match 1
-<a href="/scoutMatch?m=2019marea_qm1&tm=2876">2876</a>
+<dbtz-event-selector (eventChanged)="updateEvent($event)"></dbtz-event-selector>
+<div *ngIf="!matches.length">
+  There are no matches scheduled yet for this event.
+</div>
+<dbtz-single-match-menu
+  *ngFor="let match of matches"
+  [match]="match">
+</dbtz-single-match-menu>

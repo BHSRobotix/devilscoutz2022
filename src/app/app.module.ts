@@ -33,6 +33,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
+import { EventSelectorComponent } from './shared/event-selector/event-selector.component';
+import { SingleMatchMenuComponent } from './match-scouting/match-scouting-menu/single-match-menu/single-match-menu.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { FormsModule } from '@angular/forms';
     AdminComponent,
     TeamListComponent,
     LoginComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    EventSelectorComponent,
+    SingleMatchMenuComponent
   ],
   imports: [
     BrowserModule,

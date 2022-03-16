@@ -7,6 +7,11 @@
     display: block;
     margin: 8px auto;
     width: 150px;
+    &[disabled] {
+      pointer-events: none;
+      cursor: not-allowed;
+      opacity: 50%;
+    }
     &.blue-btn {
       background-color: $blue-70;
       color: white;
