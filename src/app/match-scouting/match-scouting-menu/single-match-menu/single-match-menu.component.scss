@@ -1,0 +1,27 @@
+@import '../../../styles/variables';
+
+:host {
+  display: block;
+  margin: auto;
+  .alliance {
+    margin-top: 4px;
+  }
+  .match-number {
+    display: inline-block;
+    width: 80px;
+    font-weight: 600;
+  }
+  a {
+    display: inline-block;
+    margin-left: 8px;
+    width: 50px;
+    &.blue-btn {
+      background-color: $blue-70;
+      color: white;
+    }
+    &.red-btn {
+      background-color: $red-70;
+      color: white;
+    }
+  }
+}
