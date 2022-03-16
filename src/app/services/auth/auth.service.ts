@@ -11,6 +11,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 const userLocalStorageKey = '_dbtzScoutingUser';
 
+// User is mostly fields that come with the Google auth object
+// But 'authenticated' and 'guest' booleans do not come from Google
+// but instead are derived here in code for business logic reasons
 export interface User {
   uid: string;
   email: string;
@@ -21,6 +24,8 @@ export interface User {
   guest: boolean;
 }
 
+// ScoutingUser adds two fields we intend to track in our own
+// scouting database
 export interface ScoutingUser extends User {
   nickname?: string;
   role?: 'guest' | 'scout' | 'lead-scout' | 'admin';
@@ -47,7 +52,7 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    return this.user?.authenticated || this.user?.guest || false;
+    return this.user?.authenticated || (this.user?.guest && !!this.user?.uid);
   }
 
   get loggedInUser(): BehaviorSubject<ScoutingUser> {
@@ -74,13 +79,13 @@ export class AuthService {
 
         // Go to Firebase scouting-users table to figure out what roles people have
         if (!!this.user.uid) {
-          console.log('going looking for user', this.user.uid);
           this.firestore.collection('scoutingUsers',
             ref => ref.where('uid', '==', this.user?.uid))
             .get()
             .subscribe((querySnapshot) => {
               querySnapshot.forEach((doc: any) => {
                 this.user.role = doc.data().role;
+                this.user.nickname = doc.data().nickname;
                 this.user$.next(this.user);
                 this.putUserIntoLocalStorage(this.user);
               });

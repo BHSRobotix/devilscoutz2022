@@ -9,6 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 import { DriverFeedbackComponent } from './driver-feedback/driver-feedback.component';
 import { AuthGuard } from './services/auth/auth.guard';
 import { LoginComponent } from './login/login.component';
+import { ConfigGuard } from './services/firebase/config.guard';
 
 const routes: Routes = [
   { path: 'menu', component: MainMenuComponent,
@@ -17,12 +18,12 @@ const routes: Routes = [
       // scoutId: ResolveAccountId
     },
   },
-  { path: 'matchScoutingMenu', component: MatchScoutingMenuComponent, canActivate: [ AuthGuard ] },
-  { path: 'scoutMatch', component: ScoutMatchComponent, canActivate: [ AuthGuard ] },
-  { path: 'driverFeedback', component: DriverFeedbackComponent, canActivate: [ AuthGuard ] },
-  { path: 'reports/teamList', component: TeamListComponent, canActivate: [ AuthGuard ] },
+  { path: 'matchScoutingMenu', component: MatchScoutingMenuComponent, canActivate: [ AuthGuard, ConfigGuard ] },
+  { path: 'scoutMatch', component: ScoutMatchComponent, canActivate: [ AuthGuard, ConfigGuard ] },
+  { path: 'driverFeedback', component: DriverFeedbackComponent, canActivate: [ AuthGuard, ConfigGuard ] },
+  { path: 'reports/teamList', component: TeamListComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'reports', component: ReportsComponent, canActivate: [ AuthGuard ] },
-  { path: 'admin', component: AdminComponent, canActivate: [ AuthGuard ] },
+  { path: 'admin', component: AdminComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'menu' }
 ];

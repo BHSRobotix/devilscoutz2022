@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
   doGoogleLogin(): void {
     this.authService.doGoogleLogin().then(result => {
-      console.log('back from authservice, result=', result);
       this.router.navigateByUrl('/menu');
     });
   }

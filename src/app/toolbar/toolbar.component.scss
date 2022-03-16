@@ -31,9 +31,12 @@
       flex-direction: row;
       vertical-align: center;
       .text {
-        font-size: 14px;
-        line-height: 14px;
+        font-size: 0.8em;
+        line-height: 1.1em;
         text-align: right;
+        .role {
+          color: $red-40;
+        }
       }
       img {
         border: 2px solid $white;
