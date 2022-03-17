@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import firebase from 'firebase';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
-import { TbaSimpleEvent } from '../tba/the-blue-alliance.types';
+import { TbaSimpleEvent, TbaSimpleTeam } from '../tba/the-blue-alliance.types';
 import { ConfigService } from './config.service';
+import { TmplAstBoundAttribute } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,15 @@ export class EventsService {
     events.forEach((evt: TbaSimpleEvent) => {
       this.firestore.collection('events').doc(evt.key).set(evt)
         .catch(error => console.error(`Error saving ${ evt.key }`, error));
+    });
+  }
+
+  postEventTeams(eventKey: string, teams: TbaSimpleTeam[]): void {
+    teams.forEach((tm: TbaSimpleTeam) => {
+      const doc: any = tm;
+      doc.eventkey = eventKey;
+      this.firestore.collection('eventTeams').doc(eventKey +'_'+tm.key).set(doc)
+        .catch(error => console.error(`Error saving ${ doc.key }`, error));
     });
   }
 }
