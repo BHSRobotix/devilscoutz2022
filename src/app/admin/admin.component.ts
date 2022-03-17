@@ -66,15 +66,22 @@ export class AdminComponent implements OnInit {
   }
 
   testService(eventKey: string): void {
-    this.matchesService.getQualificationMatchesFromEvent(eventKey)
-      .subscribe((snapshot) => {
-          snapshot.forEach((doc: any) => {
-            console.log('qual match', doc.data());
-          });
-        },
-        (error) => {
-          console.log('Error getting documents: ', error);
-        });
+    // this.matchesService.getQualificationMatchesFromEvent(eventKey)
+    //   .subscribe((snapshot) => {
+    //       snapshot.forEach((doc: any) => {
+    //         console.log('qual match', doc.data());
+    //       });
+    //     },
+    //     (error) => {
+    //       console.log('Error getting documents: ', error);
+    //     });
+    this.tba.getTeamsAtEvent(eventKey).subscribe(
+      teams => {
+        console.log(teams);
+        this.eventsService.postEventTeams(eventKey, teams);
+
+      }
+    );
   }
 
   getTeamMatchesFromEvent(teamKey: string, eventKey: string): void {
