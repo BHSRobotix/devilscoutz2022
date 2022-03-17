@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-}
 import firebase from 'firebase';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
