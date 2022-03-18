@@ -1,0 +1,108 @@
+<a class="return-link" [routerLink]="'/reports/teamList'">back to Team List</a>
+
+<div class="team-summary-header">
+  <div class="team-number-container">
+    <div class="team-number">{{ teamNumber }}</div>
+    <div class="event-name">at {{ shortenEventName(!!currentEvent ? currentEvent.name : '') }}</div>
+  </div>
+  <div class="team-metadata">
+    <div class="team-nickname">{{ teamData?.nickname }}</div>
+    <div class="team-location">{{ getLocation(teamData) }}</div>
+    <div class="team-website">{{ teamData?.website }}</div>
+  </div>
+</div>
+
+
+<table mat-table matSort [dataSource]="dataSource" class="mat-table mat-elevation-z0">
+
+  <ng-container matColumnDef="spanner">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2"></th>
+  </ng-container>
+  <ng-container matColumnDef="auto">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="3"> Autonomous </th>
+  </ng-container>
+  <ng-container matColumnDef="tele-op">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="4"> Tele-operated </th>
+  </ng-container>
+
+  <ng-container matColumnDef="match_number">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> QM# </th>
+    <td mat-cell *matCellDef="let match">{{ match.match_number }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="result">
+    <th mat-header-cell *matHeaderCellDef> W/L </th>
+    <td mat-cell *matCellDef="let match">
+      <div [class]="getMatchAlliance(match)" class="match-result">
+        {{ getMatchResult(match) }}
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="auto_taxi">
+    <th mat-header-cell *matHeaderCellDef>
+      <fa-icon [icon]="faTaxi"></fa-icon>
+    </th>
+    <td mat-cell *matCellDef="let match">
+      <!-- use scoutId field to see if any report, otherwise data could show for incomplete matches -->
+      <div *ngIf="!!getScoutedData(match.key, 'scoutId')">
+        <fa-icon *ngIf="getScoutedData(match.key, 'autoTaxi')" class="good" [icon]="faCheckCircle"></fa-icon>
+        <fa-icon *ngIf="!getScoutedData(match.key, 'autoTaxi')" class="bad" [icon]="faMinusSquare"></fa-icon>
+      </div>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="auto_low">
+    <th mat-header-cell *matHeaderCellDef>
+      <fa-icon [icon]="faArrowDown"></fa-icon>
+    </th>
+    <td mat-cell *matCellDef="let match">
+      {{ getScoutedData(match.key, 'autoLowGoalsScored') }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="auto_high">
+    <th mat-header-cell *matHeaderCellDef>
+      <fa-icon [icon]="faArrowUp"></fa-icon>
+    </th>
+    <td mat-cell *matCellDef="let match">
+      {{ getScoutedData(match.key, 'autoHighGoalsScored') }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="tele_low">
+    <th mat-header-cell *matHeaderCellDef>
+      <fa-icon [icon]="faArrowDown"></fa-icon>
+    </th>
+    <td mat-cell *matCellDef="let match">
+      {{ getScoutedData(match.key, 'teleLowGoalsScored') }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="tele_high">
+    <th mat-header-cell *matHeaderCellDef>
+      <fa-icon [icon]="faArrowUp"></fa-icon>
+    </th>
+    <td mat-cell *matCellDef="let match">
+      {{ getScoutedData(match.key, 'teleHighGoalsScored') }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="tele_climb">
+    <th mat-header-cell *matHeaderCellDef>
+      <fa-icon [icon]="faBars"></fa-icon>
+    </th>
+    <td mat-cell *matCellDef="let match">
+      {{ getScoutedData(match.key, 'climbLevel').substring(0, 3) }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="scout">
+    <th mat-header-cell *matHeaderCellDef>
+      <fa-icon [icon]="faUser"></fa-icon>
+    </th>
+    <td mat-cell *matCellDef="let match">
+      {{ scoutsHash[getScoutedData(match.key, 'scoutId')]?.nickname }}
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedMetaColumns"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedDataColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedDataColumns;  let i = index" [class.odd]="i % 2"></tr>
+</table>
+<dbtz-no-data-row *ngIf="dataSource.data.length === 0"></dbtz-no-data-row>
+
+<a class="return-link" [routerLink]="'/reports/teamList'">back to Team List</a>

@@ -1,65 +1,91 @@
-<!-- TODO - flesh out the form for scouting a single match -->
+<div *ngIf="submissionStatus === 'before-submit'">
+  <div class="scouting-instructions">
+    Scouting Team {{ form.get('team')?.value }}
+    in match # {{ matchNumFromMatchId(form.get('matchId')?.value) }}
+  </div>
 
-<form class="match-form" [formGroup]="form">
+  <form class="match-form" [formGroup]="form">
 
-  <scl-form-field>
-    <scl-form-label label="Match ID"></scl-form-label>
-    <scl-form-control>
-      <input type="hidden" formControlName="matchId">
-      <span>{{ form.get('matchId')?.value }}</span>
-    </scl-form-control>
-  </scl-form-field>
+    <!-- Dont bother showing these even as readonly - it just confuses people -->
+    <input type="hidden" formControlName="matchId">
+    <input type="hidden" formControlName="team">
+    <input type="hidden" formControlName="scoutId">
 
-  <scl-form-field>
-    <scl-form-label label="Team"></scl-form-label>
-    <scl-form-control>
-      <input type="hidden" formControlName="team">
-      <span>{{ form.get('team')?.value }}</span>
-    </scl-form-control>
-  </scl-form-field>
+    <div class="form-section autonomous-section">
+      <h3>Autonomous</h3>
 
-  <scl-form-field>
-    <scl-form-label label="Scout"></scl-form-label>
-    <scl-form-control>
-      <input type="hidden" formControlName="scoutId">
-      <span>{{ this.scout?.nickname }}</span>
-    </scl-form-control>
-  </scl-form-field>
+      <scl-form-field>
+        <scl-form-label label="Taxi"></scl-form-label>
+        <scl-form-control>
+          <mat-button-toggle-group formControlName="autoTaxi">
+            <mat-button-toggle [value]="false">No</mat-button-toggle>
+            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+          </mat-button-toggle-group>
+        </scl-form-control>
+      </scl-form-field>
 
-  <h3>Autonomous</h3>
-  <scl-form-field>
-    <scl-form-label label="Low Goals Scored"></scl-form-label>
-    <scl-form-control>
-      <scl-numeric-spinner formControlName="autoLowGoalsScored"></scl-numeric-spinner>
-    </scl-form-control>
-  </scl-form-field>
+      <scl-form-field>
+        <scl-form-label label="Low Goals Scored"></scl-form-label>
+        <scl-form-control>
+          <scl-numeric-spinner formControlName="autoLowGoalsScored"></scl-numeric-spinner>
+        </scl-form-control>
+      </scl-form-field>
 
-  <scl-form-field>
-    <scl-form-label label="High Goals Scored"></scl-form-label>
-    <scl-form-control>
-      <scl-numeric-spinner formControlName="autoHighGoalsScored"></scl-numeric-spinner>
-    </scl-form-control>
-  </scl-form-field>
+      <scl-form-field>
+        <scl-form-label label="High Goals Scored"></scl-form-label>
+        <scl-form-control>
+          <scl-numeric-spinner formControlName="autoHighGoalsScored"></scl-numeric-spinner>
+        </scl-form-control>
+      </scl-form-field>
+    </div>
 
-  <h3>Tele-op</h3>
-  <scl-form-field>
-    <scl-form-label label="Low Goals Scored"></scl-form-label>
-    <scl-form-control>
-      <scl-numeric-spinner formControlName="teleLowGoalsScored"></scl-numeric-spinner>
-    </scl-form-control>
-  </scl-form-field>
+    <div class="form-section tele-op-section">
+      <h3>Tele-op</h3>
+      <scl-form-field>
+        <scl-form-label label="Low Goals Scored"></scl-form-label>
+        <scl-form-control>
+          <scl-numeric-spinner formControlName="teleLowGoalsScored"></scl-numeric-spinner>
+        </scl-form-control>
+      </scl-form-field>
 
-  <scl-form-field>
-    <scl-form-label label="High Goals Scored"></scl-form-label>
-    <scl-form-control>
-      <scl-numeric-spinner formControlName="teleHighGoalsScored"></scl-numeric-spinner>
-    </scl-form-control>
-  </scl-form-field>
+      <scl-form-field>
+        <scl-form-label label="High Goals Scored"></scl-form-label>
+        <scl-form-control>
+          <scl-numeric-spinner formControlName="teleHighGoalsScored"></scl-numeric-spinner>
+        </scl-form-control>
+      </scl-form-field>
 
-  <button
-    mat-raised-button
-    color="primary"
-    type="button"
-    (click)="submit()"
-    [disabled]="!form.valid">Submit</button>
-</form>
+      <scl-form-field>
+        <scl-form-label label="Climb level"></scl-form-label>
+        <scl-form-control>
+          <mat-button-toggle-group formControlName="climbLevel">
+            <mat-button-toggle value="none">None</mat-button-toggle>
+            <mat-button-toggle value="low">Low</mat-button-toggle>
+            <mat-button-toggle value="medium">Medium</mat-button-toggle>
+            <mat-button-toggle value="high">High</mat-button-toggle>
+            <mat-button-toggle value="traversal">Traversal</mat-button-toggle>
+          </mat-button-toggle-group>
+        </scl-form-control>
+      </scl-form-field>
+    </div>
+
+    <button
+      mat-raised-button
+      type="button"
+      (click)="submit()"
+      [disabled]="!form.valid">Submit</button>
+
+    <a [routerLink]="'/matchScoutingMenu'">Cancel</a>
+  </form>
+</div>
+
+<div *ngIf="submissionStatus === 'waiting'">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+
+<div *ngIf="submissionStatus === 'after-submit'" class="submission-summary">
+  You have submitted this report: <br/>
+  <pre>{{ this.submittedData | json }}</pre>
+  <a [routerLink]="'/matchScoutingMenu'">return to scout another match</a><br/>
+  <a [routerLink]="'/menu'">main menu</a>
+</div>

@@ -1,0 +1,45 @@
+@import '../../styles/variables';
+
+:host {
+  div.container {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    padding: 8px;
+    margin: 8px auto;
+    border: 1px solid $gray-warm-30;
+    border-radius: 4px;
+    fa-icon {
+      margin: auto 8px;
+    }
+
+    &.info {
+      border-color: $blue-50;
+      background-color: $blue-20; // cfe2ff
+      fa-icon {
+        color: $blue-70;
+      }
+    }
+    &.warning {
+      border-color: $amber-50;
+      background-color: $amber-20;
+      fa-icon {
+        color: $amber-70;
+      }
+    }
+    &.error {
+      border-color: $red-50;
+      background-color: $red-20;
+      fa-icon {
+        color: $red-70;
+      }
+    }
+    &.success {
+      border-color: $green-50;
+      background-color: #d1e7dd; // $green-15
+      fa-icon {
+        color: $green-70;
+      }
+    }
+  }
+}

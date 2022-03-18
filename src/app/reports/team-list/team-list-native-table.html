@@ -1,0 +1,23 @@
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <!-- <th scope="col" class="text-nowrap"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span> Pictures</th>-->
+    <th scope="col">Num</th>
+    <th scope="col">Nickname</th>
+    <th scope="col">Location</th>
+    <th scope="col">URL</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let team of teams; let i = index" [class.odd]="i % 2">
+    <td>{{ team.team_number }}</td>
+    <td>{{ team.nickname }}</td>
+    <td>{{ team.city }}, {{ team.state_prov }}</td>
+    <td>{{ team.website }}</td>
+  </tr>
+
+  <!--  <td class="text-right"><a href="reportsSingleTeam.php?tmNum=<?= $row["number"] ?>"><?= $row["number"] ?></a></td>-->
+
+  </tbody>
+</table>

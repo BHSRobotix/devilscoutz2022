@@ -1,3 +1,35 @@
+@import '../../styles/variables';
+
+// Note - the right way to make this button group less crazy tall would
+// probably be to adjust the line-height on the span on the content node
+// but my efforts to do that failed so I have resorted to this
+mat-button-toggle-group {
+  height: 28px;
+  align-items: center;
+}
+
+.match-view-summary {
+  float: right;
+  text-align: center;
+  padding: 8px;
+  .last-match {
+    font-size: 0.8em;
+    color: $gray-warm-50;
+  }
+}
+
+mat-spinner {
+  margin: 40px auto;
+}
+
 dbtz-single-match-menu {
   margin: 8px 0 0 12px;
 }
+
+.match-schedule {
+  clear: both;
+  div {
+    margin-left: 8px;
+  }
+}
+

@@ -1,4 +1,7 @@
 <dbtz-event-selector (eventChanged)="updateEvent($event)"></dbtz-event-selector>
+<dbtz-notification *ngIf="!hasMatchSchedule" level="info">
+  This event has not yet started.  Therefore, some options below have been disabled.
+</dbtz-notification>
 <a mat-flat-button class="blue-btn" [routerLink]="'/matchScoutingMenu'" [disabled]="!hasMatchSchedule">Match Scouting</a>
 <a mat-flat-button class="green-btn" [routerLink]="'/reports/teamList'">Team List</a>
 <a mat-flat-button class="yellow-btn" [routerLink]="'/driverFeedback'" [disabled]="!hasMatchSchedule">Driver Feedback</a>

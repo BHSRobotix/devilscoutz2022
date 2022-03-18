@@ -35,6 +35,13 @@ import { MatOptionModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { EventSelectorComponent } from './shared/event-selector/event-selector.component';
 import { SingleMatchMenuComponent } from './match-scouting/match-scouting-menu/single-match-menu/single-match-menu.component';
+import { TeamSummaryComponent } from './reports/team-summary/team-summary.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NotificationComponent } from './shared/notification/notification.component';
+import { NoDataRowComponent } from './shared/no-data-row/no-data-row.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +56,10 @@ import { SingleMatchMenuComponent } from './match-scouting/match-scouting-menu/s
     LoginComponent,
     ToolbarComponent,
     EventSelectorComponent,
-    SingleMatchMenuComponent
+    SingleMatchMenuComponent,
+    TeamSummaryComponent,
+    NotificationComponent,
+    NoDataRowComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +82,11 @@ import { SingleMatchMenuComponent } from './match-scouting/match-scouting-menu/s
     ScoutCompLibModule,
     MatSelectModule,
     MatOptionModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatSortModule,
+    MatButtonToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }

@@ -2,24 +2,30 @@
 
 <div class="alliance">
   <a mat-flat-button class="red-btn"
+     (click)="beginScouting(match.match_number)"
      [routerLink]="'/scoutMatch'"
      [queryParams]="redQueryParams(0)">{{ redTeamNumber(0) }}</a>
   <a mat-flat-button class="red-btn"
+     (click)="beginScouting(match.match_number)"
      [routerLink]="'/scoutMatch'"
      [queryParams]="redQueryParams(1)">{{ redTeamNumber(1) }}</a>
   <a mat-flat-button class="red-btn"
+     (click)="beginScouting(match.match_number)"
      [routerLink]="'/scoutMatch'"
      [queryParams]="redQueryParams(2)">{{ redTeamNumber(2) }}</a>
 </div>
 
 <div class="alliance">
   <a mat-flat-button class="blue-btn"
+     (click)="beginScouting(match.match_number)"
      [routerLink]="'/scoutMatch'"
      [queryParams]="blueQueryParams(0)">{{ blueTeamNumber(0) }}</a>
   <a mat-flat-button class="blue-btn"
+     (click)="beginScouting(match.match_number)"
      [routerLink]="'/scoutMatch'"
      [queryParams]="blueQueryParams(1)">{{ blueTeamNumber(1) }}</a>
   <a mat-flat-button class="blue-btn"
+     (click)="beginScouting(match.match_number)"
      [routerLink]="'/scoutMatch'"
      [queryParams]="blueQueryParams(2)">{{ blueTeamNumber(2) }}</a>
 </div>

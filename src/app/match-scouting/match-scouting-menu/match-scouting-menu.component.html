@@ -1,8 +1,31 @@
 <dbtz-event-selector (eventChanged)="updateEvent($event)"></dbtz-event-selector>
-<div *ngIf="!matches.length">
-  There are no matches scheduled yet for this event.
+
+<div class="match-view-summary">
+  View Matches
+  <br/>
+  <mat-button-toggle-group id="viewMatches" name="viewMatches" [(ngModel)]="viewMatches" (change)="updateViewMatchesToggle()">
+    <mat-button-toggle value="all">All</mat-button-toggle>
+    <mat-button-toggle value="future">Only Future</mat-button-toggle>
+  </mat-button-toggle-group>
+  <br/>
+  <span class="last-match">
+    Last match # scouted:
+    <span (click)="resetLastMatchScouted()">
+      {{ lastMatchScouted }}
+      <fa-icon [icon]="faRecycle"></fa-icon>
+    </span>
+  </span>
 </div>
-<dbtz-single-match-menu
-  *ngFor="let match of matches"
-  [match]="match">
-</dbtz-single-match-menu>
+
+<div *ngIf="loading">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+<div *ngIf="!loading" class="match-schedule">
+  <dbtz-notification *ngIf="!matches.length" level="warning">
+    There are no matches scheduled yet for this event.
+  </dbtz-notification>
+  <dbtz-single-match-menu
+    *ngFor="let match of viewableMatches"
+    [match]="match">
+  </dbtz-single-match-menu>
+</div>
