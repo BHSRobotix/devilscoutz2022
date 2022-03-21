@@ -4,9 +4,15 @@
   display: inline-block;
   padding: 8px;
 
-  .inline-edit, select-edit {
+  .inline-edit {
     cursor: pointer;
     border-bottom: 1px dashed $gray-warm-60;
     color: $gray-warm-60;
+    font-size: 1.4em;
+  }
+
+  mat-select {
+    width: 200px;
+    font-size: 1.4em;
   }
 }

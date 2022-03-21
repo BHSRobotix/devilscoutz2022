@@ -10,6 +10,7 @@ import { DriverFeedbackComponent } from './driver-feedback/driver-feedback.compo
 import { AuthGuard } from './services/auth/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ConfigGuard } from './services/firebase/config.guard';
+import { TeamSummaryComponent } from './reports/team-summary/team-summary.component';
 
 const routes: Routes = [
   { path: 'menu', component: MainMenuComponent,
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'scoutMatch', component: ScoutMatchComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'driverFeedback', component: DriverFeedbackComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'reports/teamList', component: TeamListComponent, canActivate: [ AuthGuard, ConfigGuard ] },
+  { path: 'reports/teamSummary', component: TeamSummaryComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'reports', component: ReportsComponent, canActivate: [ AuthGuard ] },
   { path: 'admin', component: AdminComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'login', component: LoginComponent },

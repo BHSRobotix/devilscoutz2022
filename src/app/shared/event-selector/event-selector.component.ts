@@ -4,6 +4,7 @@ import { TbaSimpleEvent } from '../../services/tba/the-blue-alliance.types';
 import { EventsService } from '../../services/firebase/events.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { EventSelectorService } from './event-selector.service';
+import { shortenEventName } from '../util.methods';
 
 @Component({
   selector: 'dbtz-event-selector',
@@ -56,6 +57,7 @@ export class EventSelectorComponent implements OnInit {
   }
 
   updateCurrentEvent(): void {
+    console.log('updating current event to', this.currentEventKey);
     this.updateServiceValue();
     this.currentEvent =
       this.possibleEvents.find(evt => evt.key === this.currentEventKey);
@@ -65,6 +67,10 @@ export class EventSelectorComponent implements OnInit {
   updateServiceValue(): void {
     this.eventSelectorService.currentEventKey = this.currentEventKey;
     this.eventChanged.emit(this.currentEventKey);
+  }
+
+  shorten(eventName: string): string {
+    return shortenEventName(eventName);
   }
 
 }

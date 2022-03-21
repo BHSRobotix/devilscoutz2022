@@ -1,11 +1,11 @@
 <div *ngIf="!isEditing" class="inline-edit" (click)="startEdit()">
-  {{ currentEvent?.name }}
+  {{ shorten(currentEvent?.name || '') }}
   <fa-icon *ngIf="!isLocked" [icon]="faEdit"></fa-icon>
 </div>
 <div *ngIf="isEditing" class="select-edit">
-  <select [(ngModel)]="currentEventKey" (ngModelChange)="updateCurrentEvent()" (focusout)="stopEdit()">
-    <option *ngFor="let evt of possibleEvents" [value]="evt.key">
-      {{ evt.name }}
-    </option>
-  </select>
+  <mat-select [(value)]="currentEventKey" (selectionChange)="updateCurrentEvent()">
+    <mat-option *ngFor="let evt of possibleEvents" [value]="evt.key">
+      {{ shorten(evt.name) }}
+    </mat-option>
+  </mat-select>
 </div>

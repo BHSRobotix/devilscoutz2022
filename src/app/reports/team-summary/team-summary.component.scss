@@ -1,0 +1,71 @@
+@import '../../../app/styles/variables';
+
+:host {
+  .team-summary-header {
+    display: flex;
+    flex-direction: row;
+    margin: 12px;
+    width: 95%;
+    border-top: 1px solid $gray-warm-30;
+    border-bottom: 1px solid $gray-warm-30;
+    .team-number-container {
+      display: flex;
+      flex-direction: column;
+      background-color: $gray-warm-10;
+      .team-number {
+        font-size: 72px;
+        line-height: 72px;
+        padding: 12px 12px 0;
+      }
+    }
+    .team-metadata {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      .team-nickname {
+        padding: 12px;
+        font-size: 24px;
+        line-height: 24px;
+        flex: 1 1 auto;
+      }
+      .team-location, .team-website {
+        padding: 8px;
+        flex: 0 0 auto;
+      }
+      .team-location {
+        border-top: 1px solid $gray-warm-30;
+        border-bottom: 1px solid $gray-warm-30;
+      }
+      div:nth-child(odd) {
+        background-color: $gray-warm-10;
+      }
+    }
+
+  }
+
+  .mat-table {
+    width: 100%;
+    table-layout: fixed;
+    .match-result {
+      width: 20px;
+      background-color: $gray-warm-70;
+      color: white;
+      text-align: center;
+      &.blue {
+        background-color: $blue-70;
+      }
+      &.red {
+        background-color: $red-70;
+      }
+    }
+
+    fa-icon {
+      &.good {
+        color: $green-70;
+      }
+      &.bad {
+        color: $red-70;
+      }
+    }
+  }
+}

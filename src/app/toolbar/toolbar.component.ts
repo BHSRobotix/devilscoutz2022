@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faRobot } from '@fortawesome/free-solid-svg-icons';
-import { AuthService, ScoutingUser, User } from '../services/auth/auth.service';
+import { AuthService, ScoutingUser } from '../services/auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
+import { ToolbarService } from './toolbar.service';
 
 @Component({
   selector: 'dbtz-toolbar',
@@ -15,7 +16,8 @@ export class ToolbarComponent implements OnInit {
   user: ScoutingUser | undefined;
   user$: BehaviorSubject<ScoutingUser> | undefined;
 
-  constructor(private readonly auth: AuthService) { }
+  constructor(private readonly auth: AuthService,
+              private readonly toolbarService: ToolbarService) { }
 
   ngOnInit(): void {
     this.user$ = this.auth.loggedInUser;
@@ -31,6 +33,10 @@ export class ToolbarComponent implements OnInit {
 
   get displayName(): string {
     return this.user?.nickname || this.user?.displayName || 'Guest';
+  }
+
+  get activeLinks(): boolean {
+    return this.toolbarService.activeLinks;
   }
 
 }

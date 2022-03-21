@@ -1,6 +1,27 @@
+@import '../../styles/variables';
+
+.scouting-instructions {
+  margin: 4px;
+  color: $gray-warm-70;
+  font-style: italic;
+}
 .scl-numeric-spinner_container {
   width: 150px;
+}
 
+.form-section {
+  h3 {
+    margin: 0 8px;
+  }
+  margin: 4px;
+  border: 1px solid $gray-warm-30;
+  border-radius: 4px;
+  &.autonomous-section {
+    background-color: $green-5;
+  }
+  &.tele-op-section {
+    background-color: $blue-5;
+  }
 }
 
 input {
@@ -36,5 +57,29 @@ input[type=number] {
     height: 34px;
     width: 23px;
     cursor: pointer;
+  }
+}
+
+button {
+  background-color: $blue-70;
+  color: white;
+  margin: 4px 12px 0 100px;
+}
+
+mat-spinner {
+  margin: 40px auto;
+}
+
+.submission-summary {
+  margin: 8px 8px;
+  pre {
+    border: 1px solid $blue-70;
+    background-color: $blue-20;
+    border-radius: 4px;
+  }
+  a {
+    display: inline-block;
+    font-size: 1.3em;
+    margin-bottom: 8px;
   }
 }

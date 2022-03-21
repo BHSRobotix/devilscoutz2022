@@ -16,17 +16,30 @@
   </div>
 
   <div *ngIf="isLeadScout || isAdmin"  class="admin-action frequent">
-    <select [(ngModel)]="currentEvent" name="currentEvent">
+    <select [(ngModel)]="currentEventKey" name="currentEvent">
       <option value="" selected></option>
       <option *ngFor="let event of localEvents" [value]="event.key">
         {{ eventDisplayName(event) }}
       </option>
     </select>
-    <button (click)="updateMatchesAtCurrentEvent()" [disabled]="!currentEvent">
+    <button (click)="updateMatchesAtCurrentEvent()" [disabled]="!currentEventKey">
       Update Matches from Event
     </button>
     <div class="description">
       Choose an event, and update the match results from TBA, saved in Firebase.
+    </div>
+  </div>
+
+  <div *ngIf="isAdmin" class="admin-action rare">
+    <select [(ngModel)]="currentEventKey" name="currentEvent">
+      <option value="" selected></option>
+      <option *ngFor="let event of localEvents" [value]="event.key">
+        {{ eventDisplayName(event) }}
+      </option>
+    </select>
+    <button (click)="updateTeamsAtEvent()">Update Teams at Event</button>
+    <div class="description">
+      Choose an event, and update the set of teams at that event in Firebase.
     </div>
   </div>
 

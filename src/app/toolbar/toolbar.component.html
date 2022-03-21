@@ -1,8 +1,13 @@
 <mat-toolbar class="app-toolbar">
-  <a [routerLink]="'mainMenu'">
+  <a *ngIf="activeLinks" class="menu-link" [routerLink]="'mainMenu'">
     <fa-icon [icon]="faRobot"></fa-icon>
     <div>2876 DevilScoutz</div>
   </a>
+  <div *ngIf="!activeLinks" class="no-menu-link">
+    <fa-icon [icon]="faRobot"></fa-icon>
+    <div>2876 DevilScoutz</div>
+  </div>
+
   <div *ngIf="!!user?.uid" class="profile">
     <div class="text">
       <div class="name">{{ displayName }}</div>

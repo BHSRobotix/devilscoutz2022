@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TbaSimpleMatch } from '../../../services/tba/the-blue-alliance.types';
+import { MatchScoutingMenuStateService } from '../match-scouting-menu-state.service';
 
 @Component({
   selector: 'dbtz-single-match-menu',
@@ -10,10 +11,14 @@ export class SingleMatchMenuComponent implements OnInit {
 
   @Input() match!: TbaSimpleMatch;
 
-  constructor() { }
+  constructor(private readonly stateService: MatchScoutingMenuStateService) { }
 
   ngOnInit(): void {
-    console.log(this.match);
+    // console.log(this.match);
+  }
+
+  beginScouting(matchNum: number): void {
+    this.stateService.lastMatchScouted = matchNum;
   }
 
   blueQueryParams(index: number): any {

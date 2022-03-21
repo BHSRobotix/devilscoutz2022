@@ -15,7 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AdminComponent implements OnInit {
 
-  currentEvent: string;
+  currentEventKey: string;
   localEvents: TbaSimpleEvent[] = [];
 
   user: ScoutingUser | undefined;
@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.currentEvent = '';
+    this.currentEventKey = '';
   }
 
   ngOnInit(): void {
@@ -78,7 +78,7 @@ export class AdminComponent implements OnInit {
     this.tba.getTeamsAtEvent(eventKey).subscribe(
       teams => {
         console.log(teams);
-        this.eventsService.postEventTeams(eventKey, teams);
+        // this.eventsService.postEventTeams(eventKey, teams);
 
       }
     );
@@ -99,6 +99,14 @@ export class AdminComponent implements OnInit {
         });
   }
 
+  updateTeamsAtEvent(): void {
+    this.tba.getTeamsAtEvent(this.currentEventKey).subscribe(
+      teams => {
+        this.eventsService.postEventTeams(this.currentEventKey, teams);
+      }
+    );
+  }
+
   updateDistrictEvents(): void {
     this.tba.getDistrictEvents().subscribe(events => {
         this.eventsService.postEvents(events);
@@ -110,8 +118,8 @@ export class AdminComponent implements OnInit {
 
   updateMatchesAtCurrentEvent(): void {
     // @ts-ignore
-    console.log('updateMatchesAtEvent ', this.currentEvent);
-    this.tba.getMatchesAtEvent(this.currentEvent).subscribe(result => {
+    console.log('updateMatchesAtEvent ', this.currentEventKey);
+    this.tba.getMatchesAtEvent(this.currentEventKey).subscribe(result => {
         console.log(result);
         result.forEach((match: TbaSimpleMatch) => {
           this.firestore.collection('matches').doc(match.key).set(match)

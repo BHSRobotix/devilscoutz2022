@@ -10,7 +10,7 @@
     fa-icon {
       color: $red-40;
     }
-    a {
+    a.menu-link, div.no-menu-link {
       flex: 1 0 auto;
       color: white;
       display: flex;
