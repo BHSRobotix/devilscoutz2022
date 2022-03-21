@@ -107,3 +107,26 @@ export interface TbaSimpleMatch {
 // There doesn't appear to be a difference in match vs simple-match
 // export interface TbaMatch extends TbaSimpleMatch {
 // }
+
+export interface TbaEventRanking {
+  team_key: string; // in form frcNNNN
+  dq: number;
+  extra_stats: number[]; // 2022 seems to always be length 1, extra_stats[0] contains total RPs
+  matches_played: number;
+  qual_average: any;  // seems to be null a lot
+  rank: number;
+  record: {
+    wins: number;
+    losses: number;
+    ties: number;
+  };
+  // array of length 6 (in 2022)
+  //   [ avgRPs, avgMatchScore, avgHangScore, avgAutoScore (taxi + cargo), unused?, unused? ]
+  sort_orders: number[];
+}
+
+export interface TbaRankingResponse {
+  rankings: TbaEventRanking[];
+  extra_stats_info: any[]; // no plans to use this, not going to type it out yet
+  sort_order_info: any[];  // no plans to use this, not going to type it out yet
+}

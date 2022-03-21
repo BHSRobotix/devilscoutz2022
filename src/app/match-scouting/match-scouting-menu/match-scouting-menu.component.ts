@@ -34,24 +34,30 @@ export class MatchScoutingMenuComponent implements OnInit {
   // not necessary to call this in the ngOnInit as you might normally expect
   updateEvent(eventKey: string): void {
     this.matches = [];
-    this.loading = true;
-    this.matchesService.getQualificationMatchesFromEvent(eventKey)
-      .subscribe((snapshot) => {
-          snapshot.forEach((doc: any) => {
-            this.matches.push(doc.data());
+    if (!!this.stateService.matches[eventKey]) {
+      this.matches = this.stateService.matches[eventKey];
+      this.updateViewableMatches();
+    } else {
+      this.loading = true;
+      this.matchesService.getQualificationMatchesFromEvent(eventKey)
+        .subscribe((snapshot) => {
+            snapshot.forEach((doc: any) => {
+              this.matches.push(doc.data());
+            });
+            this.matches.sort(
+              (a, b) =>
+                a.match_number > b.match_number ? 1 : -1);
+            this.stateService.matches[eventKey] = this.matches;
+            this.updateViewableMatches();
+            this.loading = false;
+            this.errorLoading = false;
+          },
+          (error) => {
+            console.log('Error getting documents: ', error);
+            this.loading = false;
+            this.errorLoading = true;
           });
-          this.matches.sort(
-            (a, b) =>
-              a.match_number > b.match_number ? 1 : -1);
-          this.updateViewableMatches();
-          this.loading = false;
-          this.errorLoading = false;
-        },
-        (error) => {
-          console.log('Error getting documents: ', error);
-          this.loading = false;
-          this.errorLoading = true;
-        });
+    }
   }
 
   updateViewMatchesToggle(): void {
@@ -63,7 +69,6 @@ export class MatchScoutingMenuComponent implements OnInit {
     this.viewMatches === 'all' ?
       this.viewableMatches = this.matches :
       this.viewableMatches = this.matches.filter(m => m.match_number >= this.lastMatchScouted);
-    console.log(this.viewableMatches.length);
   }
 
   resetLastMatchScouted(): void {

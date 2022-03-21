@@ -59,6 +59,11 @@ export class AuthService {
     return this.user$;
   }
 
+  updateUser(userData: Partial<ScoutingUser>): void {
+    this.user = { ...this.user, ...userData };
+    this.user$.next(this.user);
+  }
+
   doGoogleLogin(): Promise<any> {
     const provider: AuthProvider = new firebase.auth.GoogleAuthProvider();
     return this.fireAuth.signInWithPopup(provider)

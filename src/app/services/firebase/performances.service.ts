@@ -49,4 +49,11 @@ export class PerformancesService {
     ).get();
   }
 
+  getScoutingReportsForEvent(eventKey: string): Observable<QuerySnapshot<unknown>> {
+    return this.firestore.collection('performances',
+      ref => ref
+        .where('eventKey', '==', eventKey)
+    ).get();
+  }
+
 }

@@ -2,9 +2,9 @@
 <dbtz-notification *ngIf="!hasMatchSchedule" level="info">
   This event has not yet started.  Therefore, some options below have been disabled.
 </dbtz-notification>
-<a mat-flat-button class="blue-btn" [routerLink]="'/matchScoutingMenu'" [disabled]="!hasMatchSchedule">Match Scouting</a>
+<a mat-flat-button class="blue-btn" [routerLink]="'/matchScoutingMenu'" [disabled]="!hasMatchSchedule || isGuest">Match Scouting</a>
 <a mat-flat-button class="green-btn" [routerLink]="'/reports/teamList'">Team List</a>
-<a mat-flat-button class="yellow-btn" [routerLink]="'/driverFeedback'" [disabled]="!hasMatchSchedule">Driver Feedback</a>
+<a mat-flat-button class="yellow-btn" [routerLink]="'/driverFeedback'" [disabled]="!hasMatchSchedule || isGuest">Driver Feedback</a>
 <a mat-flat-button class="orange-btn" [routerLink]="'/reports'">Reports</a>
-<a mat-flat-button class="red-btn" [routerLink]="'/admin'">Admin</a>
+<a mat-flat-button class="red-btn" [routerLink]="'/admin'" [disabled]="isGuest">Admin</a>
 <a mat-flat-button class="white-btn" (click)="logout()">Logout</a>

@@ -45,15 +45,22 @@ export class MainMenuComponent implements OnInit {
     return this.user?.role === 'admin';
   }
 
+  get isGuest(): boolean {
+    return this.user?.role === 'guest';
+  }
+
   updateEvent(evtKey: string): void {
+    // TODO - don't get all these docs to figure this out - hacking to true for now
     // Figure out if there is a match schedule yet
-    this.matchesService.getQualificationMatchesFromEvent(evtKey)
-      .subscribe((snapshot) => {
-        this.hasMatchSchedule = !snapshot.empty;
-        },
-        (error) => {
-          console.log('Error getting documents: ', error);
-        });
+    // this.matchesService.getQualificationMatchesFromEvent(evtKey)
+    //   .subscribe((snapshot) => {
+    //     this.hasMatchSchedule = !snapshot.empty;
+    //     },
+    //     (error) => {
+    //       console.log('Error getting documents: ', error);
+    //     });
+
+    this.hasMatchSchedule = true;
   }
 
   logout(): void {

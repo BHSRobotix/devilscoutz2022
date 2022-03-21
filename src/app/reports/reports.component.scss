@@ -1,0 +1,40 @@
+@import '../../app/styles/variables';
+
+:host {
+  display: block;
+  margin: auto;
+  a {
+    display: block;
+    margin: 8px auto;
+    width: 150px;
+    &[disabled] {
+      pointer-events: none;
+      cursor: not-allowed;
+      opacity: 50%;
+    }
+    &.blue-btn {
+      background-color: $blue-70;
+      color: white;
+    }
+    &.green-btn {
+      background-color: $green-70;
+      color: white;
+    }
+    &.yellow-btn {
+      background-color: $amber-60;
+      color: white;
+    }
+    &.orange-btn {
+      background-color: $orange-60;
+      color: white;
+    }
+    &.red-btn {
+      background-color: $red-70;
+      color: white;
+    }
+    &.white-btn {
+      background-color: white;
+      border: 1px solid $gray-warm-30;
+    }
+  }
+}

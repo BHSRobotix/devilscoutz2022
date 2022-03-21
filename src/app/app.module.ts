@@ -42,6 +42,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationComponent } from './shared/notification/notification.component';
 import { NoDataRowComponent } from './shared/no-data-row/no-data-row.component';
+import { ProfileComponent } from './profile/profile.component';
+import { TeamStatsComponent } from './reports/team-stats/team-stats.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { NoDataRowComponent } from './shared/no-data-row/no-data-row.component';
     SingleMatchMenuComponent,
     TeamSummaryComponent,
     NotificationComponent,
-    NoDataRowComponent
+    NoDataRowComponent,
+    ProfileComponent,
+    TeamStatsComponent
   ],
   imports: [
     BrowserModule,
