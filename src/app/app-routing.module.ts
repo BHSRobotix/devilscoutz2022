@@ -11,6 +11,8 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { ConfigGuard } from './services/firebase/config.guard';
 import { TeamSummaryComponent } from './reports/team-summary/team-summary.component';
+import { ProfileComponent } from './profile/profile.component';
+import { TeamStatsComponent } from './reports/team-stats/team-stats.component';
 
 const routes: Routes = [
   { path: 'menu', component: MainMenuComponent,
@@ -23,8 +25,10 @@ const routes: Routes = [
   { path: 'scoutMatch', component: ScoutMatchComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'driverFeedback', component: DriverFeedbackComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'reports/teamList', component: TeamListComponent, canActivate: [ AuthGuard, ConfigGuard ] },
+  { path: 'reports/teamStats', component: TeamStatsComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'reports/teamSummary', component: TeamSummaryComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'reports', component: ReportsComponent, canActivate: [ AuthGuard ] },
+  { path: 'profile', component: ProfileComponent, canActivate: [ AuthGuard ] },
   { path: 'admin', component: AdminComponent, canActivate: [ AuthGuard, ConfigGuard ] },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'menu' }

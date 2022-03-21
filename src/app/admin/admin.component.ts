@@ -75,9 +75,10 @@ export class AdminComponent implements OnInit {
     //     (error) => {
     //       console.log('Error getting documents: ', error);
     //     });
-    this.tba.getTeamsAtEvent(eventKey).subscribe(
-      teams => {
-        console.log(teams);
+
+    this.tba.getEventRankings('2022tuis').subscribe(
+      result => {
+        console.log(result);
         // this.eventsService.postEventTeams(eventKey, teams);
 
       }
@@ -118,9 +119,9 @@ export class AdminComponent implements OnInit {
 
   updateMatchesAtCurrentEvent(): void {
     // @ts-ignore
-    console.log('updateMatchesAtEvent ', this.currentEventKey);
+    // console.log('updateMatchesAtEvent ', this.currentEventKey);
     this.tba.getMatchesAtEvent(this.currentEventKey).subscribe(result => {
-        console.log(result);
+        // console.log(result);
         result.forEach((match: TbaSimpleMatch) => {
           this.firestore.collection('matches').doc(match.key).set(match)
             .then(() => {

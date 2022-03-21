@@ -7,9 +7,12 @@ import { ConfigService } from '../../services/firebase/config.service';
 export class EventSelectorService {
 
   currentEventKey: string;
+  // TODO - make this real
+  eventLocked = true;
 
   constructor(private readonly configService: ConfigService) {
-    this.currentEventKey = this.configService.currentEventKey;
+    // TODO - remove this hack and figure out a better way
+    this.currentEventKey = '2022marea'; // this.configService.currentEventKey;
   }
 
 }

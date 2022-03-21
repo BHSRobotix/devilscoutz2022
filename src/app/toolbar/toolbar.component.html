@@ -9,10 +9,12 @@
   </div>
 
   <div *ngIf="!!user?.uid" class="profile">
-    <div class="text">
-      <div class="name">{{ displayName }}</div>
-      <div class="role">{{ user?.role }}</div>
-    </div>
-    <img [src]="user?.photoURL">
+    <a *ngIf="activeLinks" class="menu-link" [routerLink]="'profile'">
+      <div class="text">
+        <div class="name">{{ displayName }}</div>
+        <div class="role">{{ user?.role }}</div>
+      </div>
+      <img [src]="user?.photoURL">
+    </a>
   </div>
 </mat-toolbar>

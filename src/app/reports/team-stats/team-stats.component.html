@@ -1,0 +1,78 @@
+<dbtz-event-selector (eventChanged)="updateEvent($event)"></dbtz-event-selector>
+
+<div *ngIf="loading">
+  <mat-spinner [diameter]="30"></mat-spinner>
+</div>
+
+<div *ngIf="!loading">
+
+  <table mat-table matSort [dataSource]="dataSource" class="mat-table mat-elevation-z0">
+
+    <ng-container matColumnDef="spanner">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="3"></th>
+    </ng-container>
+    <ng-container matColumnDef="auto">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="3"> Autonomous </th>
+    </ng-container>
+    <ng-container matColumnDef="tele-op">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="3"> Tele-operated </th>
+    </ng-container>
+
+    <ng-container matColumnDef="teamNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tm </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.teamNumber }}</td>
+    </ng-container>
+    <ng-container matColumnDef="rankingPoints">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> RP </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.rankingPoints }}</td>
+    </ng-container>
+    <ng-container matColumnDef="record">
+      <th mat-header-cell *matHeaderCellDef> Record </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.wins }}-{{ sum.losses }}-{{ sum.ties }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="avgTaxi">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <fa-icon [icon]="faTaxi"></fa-icon>
+      </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.avgTaxi >= 0 ? sum.avgTaxi.toFixed(1) : '-' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="avgAutoLow">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <fa-icon [icon]="faArrowDown"></fa-icon>
+      </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.avgAutoLow >= 0 ? sum.avgAutoLow.toFixed(1) : '-' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="avgAutoHigh">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <fa-icon [icon]="faArrowUp"></fa-icon>
+      </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.avgAutoHigh >= 0 ? sum.avgAutoHigh.toFixed(1) : '-' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="avgTeleLow">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <fa-icon [icon]="faArrowDown"></fa-icon>
+      </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.avgTeleLow >= 0 ? sum.avgTeleLow.toFixed(1) : '-' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="avgTeleHigh">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <fa-icon [icon]="faArrowUp"></fa-icon>
+      </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.avgTeleHigh >= 0 ? sum.avgTeleHigh.toFixed(1) : '-' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="avgClimbLevel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <fa-icon [icon]="faBars"></fa-icon>
+      </th>
+      <td mat-cell *matCellDef="let sum">{{ sum.avgClimbLevel >= 0 ? sum.avgClimbLevel.toFixed(1) : '-' }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedMetaColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedDataColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedDataColumns;  let i = index" [class.odd]="i % 2"></tr>
+  </table>
+
+  <dbtz-no-data-row *ngIf="dataSource.data.length === 0"></dbtz-no-data-row>
+</div>

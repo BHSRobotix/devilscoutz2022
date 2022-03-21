@@ -1,0 +1,22 @@
+@import '../../../app/styles/variables';
+
+:host {
+
+  mat-spinner {
+    margin: 40px auto;
+  }
+
+  .mat-table {
+    width: 100%;
+    //table-layout: fixed;
+    .mat-row:nth-child(even){
+      background-color: $gray-warm-10;
+    }
+
+    .mat-column-teamNumber {
+      text-align: right;
+      padding-right: 8px;
+      width: 40px;
+    }
+  }
+}

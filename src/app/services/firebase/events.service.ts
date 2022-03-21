@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import firebase from 'firebase';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
-import { TbaSimpleEvent, TbaSimpleTeam, TbaTeam } from '../tba/the-blue-alliance.types';
-import { ConfigService } from './config.service';
-import { TmplAstBoundAttribute } from '@angular/compiler';
+import { TbaSimpleEvent, TbaTeam } from '../tba/the-blue-alliance.types';
 import { EventTeam } from './event-teams.service';
 
 @Injectable({
@@ -14,21 +12,36 @@ import { EventTeam } from './event-teams.service';
 })
 export class EventsService {
 
+  // Keep a few observables around so we can save hits on Firestore
+  querySnapshotObservableCache: { [key: string]: Observable<QuerySnapshot<unknown>> } = { };
+  documentSnapshotObservableCache: { [key: string]: Observable<DocumentSnapshot<unknown>> } = { };
+
   constructor(private firestore: AngularFirestore) { }
 
   getEventsFromDistrict(districtKey: string): Observable<QuerySnapshot<unknown>> {
-    return this.firestore.collection('events',
-        ref => ref.where('district.abbreviation', '==', districtKey))
-      .get();
+    const hashKey = `getEventsFromDistrict_${ districtKey }`;
+    if (!this.querySnapshotObservableCache[hashKey]) {
+      this.querySnapshotObservableCache[hashKey] = this.firestore.collection('events',
+          ref => ref.where('district.abbreviation', '==', districtKey)).get();
+    }
+    return this.querySnapshotObservableCache[hashKey];
   }
 
   getEvents(): Observable<QuerySnapshot<unknown>> {
-    return this.firestore.collection('events').get();
+    if (!this.querySnapshotObservableCache['getEvents']) {
+      this.querySnapshotObservableCache['getEvents'] = this.firestore.collection('events').get();
+    }
+    return this.querySnapshotObservableCache['getEvents'];
   }
 
   getEventByKey(eventKey: string): Observable<DocumentSnapshot<unknown>> {
-    // This should work because the event key is being used as the docId
-    return this.firestore.collection('events').doc(eventKey).get();
+    const hashKey = `getEventByKey_${ eventKey }`;
+    if (!this.documentSnapshotObservableCache[hashKey]) {
+      // This should work because the event key is being used as the docId
+      this.documentSnapshotObservableCache[hashKey] =
+        this.firestore.collection('events').doc(eventKey).get();
+    }
+    return this.documentSnapshotObservableCache[hashKey];
   }
 
   postEvents(events: TbaSimpleEvent[]): void {

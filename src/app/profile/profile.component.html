@@ -1,0 +1,37 @@
+<div class="auth-data-section">
+  <dbtz-notification>
+    This information comes from your authentication source and can be updated there.
+  </dbtz-notification>
+  <div><label>Display Name:</label><span>{{ user?.displayName }}</span></div>
+  <div><label>Email:</label><span>{{ user?.email }}</span></div>
+  <div>
+    <label>Photo URL:</label>
+    <span *ngIf="!!user?.photoURL"><img src="{{ user?.photoURL }}"/></span>
+    <span *ngIf="!user?.photoURL">No photo url available</span>
+  </div>
+</div>
+
+<div class="auth-data-section">
+  <dbtz-notification [level]="'success'">
+    This data is part of this app and can be edited here.
+  </dbtz-notification>
+  <div>
+    <label>Nickname:</label>
+    <ng-container *ngIf="!isEditingNickname">
+      <span>{{ user?.nickname }}</span>
+      <fa-icon [icon]="faEdit" (click)="startEditNickname()"></fa-icon>
+    </ng-container>
+    <ng-container *ngIf="isEditingNickname">
+      <input type="text" [(ngModel)]="newNickname"/>
+      <fa-icon [icon]="faCheckSquare" (click)="finishEditNickname()"></fa-icon>
+    </ng-container>
+  </div>
+  <div class="description">
+    If set differently than displayName above, this is what will be shown
+    within the app any time a name is shown.
+  </div>
+  <div><label>Role:</label><span>{{ user?.role }}</span></div>
+  <div class="description">
+    Feature not implemented yet - request to have an enhanced role.
+  </div>
+</div>

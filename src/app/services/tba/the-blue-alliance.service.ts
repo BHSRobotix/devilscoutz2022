@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TbaEvent, TbaSimpleEvent, TbaSimpleMatch, TbaSimpleTeam, TbaTeam } from './the-blue-alliance.types';
+import { TbaEvent, TbaRankingResponse, TbaSimpleEvent, TbaSimpleMatch, TbaSimpleTeam, TbaTeam } from './the-blue-alliance.types';
 
 const BASE_URL = 'https://www.thebluealliance.com/api/v3';
 const AUTH_KEY_NAME = 'X-TBA-Auth-Key';
@@ -49,8 +49,13 @@ export class TheBlueAllianceService {
   getTeamsAtEvent(eventKey: string): Observable<TbaTeam[]> {
     return this.http.get<TbaTeam[]>(`${BASE_URL}/event/${eventKey}/teams`, headers());
   }
+
   getMatchesAtEvent(eventKey: string): Observable<TbaSimpleMatch[]> {
     return this.http.get<TbaSimpleMatch[]>(`${BASE_URL}/event/${eventKey}/matches/simple`, headers());
+  }
+
+  getEventRankings(eventKey: string): Observable<TbaRankingResponse> {
+    return this.http.get<TbaRankingResponse>(`${BASE_URL}/event/${eventKey}/rankings`, headers());
   }
 
 }

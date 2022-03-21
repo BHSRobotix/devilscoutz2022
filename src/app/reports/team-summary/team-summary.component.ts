@@ -69,8 +69,6 @@ export class TeamSummaryComponent implements AfterViewInit, OnInit {
     this.teamNumber = this.route.snapshot.queryParamMap.get('tm') as string;
     this.eventKey = this.route.snapshot.queryParamMap.get('evt') as string;
 
-    console.log('about to retrieve events for team');
-
     // Retrieve team data and all events they are in
     this.eventTeamsService.getEventsForTeam(this.teamNumber)
       .subscribe((snapshot) => {
@@ -78,7 +76,6 @@ export class TeamSummaryComponent implements AfterViewInit, OnInit {
           snapshot.forEach((doc: any) => {
             // the team data should be the same for all events
             this.teamData = doc.data();
-            console.log(this.teamData);
             this.allTeamEvents.push(doc.data().eventKey);
           });
         },

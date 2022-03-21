@@ -27,7 +27,9 @@ export class EventSelectorComponent implements OnInit {
               private readonly eventSelectorService: EventSelectorService) { }
 
   ngOnInit(): void {
-    this.isLocked = this.configService.eventLocked;
+    // TODO - figure out which of the next two lines makes more sense
+    // this.isLocked = this.configService.eventLocked;
+    this.isLocked = this.eventSelectorService.eventLocked;
     // Get the current event from the local service which saves is, and emit
     this.currentEventKey = this.eventSelectorService.currentEventKey;
     this.eventChanged.emit(this.currentEventKey);
@@ -57,7 +59,7 @@ export class EventSelectorComponent implements OnInit {
   }
 
   updateCurrentEvent(): void {
-    console.log('updating current event to', this.currentEventKey);
+    // console.log('updating current event to', this.currentEventKey);
     this.updateServiceValue();
     this.currentEvent =
       this.possibleEvents.find(evt => evt.key === this.currentEventKey);
